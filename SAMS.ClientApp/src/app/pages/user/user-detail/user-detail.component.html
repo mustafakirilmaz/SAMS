@@ -1,0 +1,44 @@
+<app-page-header [caption]="'Kullanıcı Ekle/Güncelle'"></app-page-header>
+
+<p-panel header="Kullanıcı Bilgileri" [toggleable]="true">
+  <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold" required>Ad: </label>
+        <input type="text" formControlName="name" maxlength="50" pInputText>
+        <app-validator [control]="userFormControls.name"></app-validator>
+      </div>
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold" required>Soyad: </label>
+        <input type="text" formControlName="surname" maxlength="50" pInputText>
+        <app-validator [control]="userFormControls.surname"></app-validator>
+      </div>
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold" required>Eposta: </label>
+        <input type="text" formControlName="email" maxlength="50" pInputText>
+        <app-validator [control]="userFormControls.email"></app-validator>
+      </div>
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold" required>Telefon: </label>
+        <p-inputMask formControlName="phone" maxlength="32" mask="{{ch.globals.phoneNumberMask}}" class="full-width">
+        </p-inputMask>
+        <app-validator [control]="userFormControls.phone"></app-validator>
+      </div>
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold" required>Aktif mi?: </label>
+        <p-toggleButton onLabel="Yes" offLabel="No" onIcon="pi ; pi-check" offIcon="pi pi-times"
+        formControlName="isActive" class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12 p-p-0">
+      </p-toggleButton>
+        <app-validator [control]="userFormControls.isActive"></app-validator>
+      </div>
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label required>Rol: </label>
+        <p-multiSelect [options]="roles" formControlName="roleIds"></p-multiSelect>
+        <app-validator [control]="userFormControls.roleIds"></app-validator>
+      </div>
+    </div>
+    <div class="p-d-flex p-jc-end p-mt-4">
+      <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+    </div>
+  </form>
+</p-panel>

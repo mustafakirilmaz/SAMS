@@ -1,0 +1,36 @@
+<!-- <app-e-imza [htmlData]="reportHtml" (hideEImzaForm)="displayEImzaDialog = false;" *ngIf="displayEImzaDialog"></app-e-imza> -->
+
+<div class="p-col-12" style="margin-bottom:250px;">
+
+  <div class="ui-toolbar-group-left">
+    <div class="mt10 ml20 fs16">{{reportTitle}}</div>
+  </div>
+  <div class="ui-toolbar-group-right mt5" style="margin-bottom: -6px">
+    <button pButton type="button" style="display:none;"></button>
+    <button pButton type="button" label="Excel" (click)="downloadExcel()" *ngIf="displayExcel" icon="fa fa-file-excel-o"
+      class="ui-button-info mr5"></button>
+    <button pButton type="button" label="Pdf" (click)="downloadPdf()" *ngIf="displayPdf" icon="fa fa-file-pdf-o" class="ui-button-info mr5"></button>
+    <button pButton type="button" label="Yazdır" icon="fa fa-print" (click)="print()" *ngIf="displayYazdir" class="ui-button-info mr5"></button>
+    <button pButton type="button" label="Yeni Sekmede Aç" (click)="yeniSekmedeAc(true)" *ngIf="displayYeniSekme" icon="fa fa-external-link"
+      class="ui-button-info mr10"></button>
+  </div>
+  <p-panel>
+    <div *ngIf="displayCustomToolbar"
+      style="background-color: #d1ddbe; padding-top: 5px; width: 100%; margin-bottom: 8px; height: 38px; border-radius: 5px;">
+      <ng-content select="[customHeader]"></ng-content>
+    </div>
+    <div class="p-grid p-justify-center">
+      <div id="content" style="background-color: white; padding: 10px; overflow-x: auto; max-width: 800px; font-weight: normal;" #reportContent>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </p-panel>
+</div>
+
+
+
+<!-- <p-dialog header="E-İmzala" [(visible)]="displayEimzaForm" [modal]="false" [style]="{width: '400px'}">
+
+  <app-e-imza></app-e-imza>
+
+</p-dialog> -->

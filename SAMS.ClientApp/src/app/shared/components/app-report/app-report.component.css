@@ -1,0 +1,3 @@
+::ng-deep body .ui-panel .ui-panel-titlebar {
+  min-height: 38px;
+}

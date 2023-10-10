@@ -1,0 +1,6 @@
+<p-chips [(ngModel)]="selectedValue" [max]="1" (onRemove)="onRemove()" *ngIf="selectedValue.length==1" [disabled]="isDisabled"></p-chips>
+<form [formGroup]="parentForm" *ngIf="selectedValue.length==0">
+    <p-autoComplete [formControlName]="controlName" [suggestions]="filteredItems" (completeMethod)="searchFn($event)"
+        field="label" (onSelect)="onSelect($event)">
+    </p-autoComplete>
+</form>

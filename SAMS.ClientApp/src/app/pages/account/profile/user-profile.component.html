@@ -1,0 +1,77 @@
+<app-page-header [caption]="'Kullanıcı Profili'"></app-page-header>
+
+<div class="p-grid ui-fluid">
+  <div class="p-col-12 p-lg-6 p-md-12 p-sm-12">
+    <p-fieldset legend="Kullanıcı Profili">
+      <form [formGroup]="userForm" (ngSubmit)="updateUserInfo()">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label class="bold" required>Ad</label>
+            <input type="text" formControlName="name" maxlength="50" pInputText>
+            <app-validator [control]="userFormControls.name"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label class="bold" required>Soyad</label>
+            <input type="text" formControlName="surname" maxlength="50" pInputText>
+            <app-validator [control]="userFormControls.surname"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label class="bold" required>Telefon</label>
+            <p-inputMask formControlName="phone" maxlength="32" mask="{{ch.globals.phoneNumberMask}}" class="full-width">
+            </p-inputMask>
+            <app-validator [control]="userFormControls.phone"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label class="bold" required>Eposta</label>
+            <input type="text" formControlName="email" maxlength="50" pInputText>
+            <app-validator [control]="userFormControls.email"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label class="bold" required>Profil Resmi</label>
+            <app-file-upload [id]="userForm.value.rowGuid" folderName="{{'User'}}"
+              referenceGuid="{{ userForm.value.rowGuid }}" accept="image/*" fileLimit="1"
+              (uploadCallback)="uploadCompleted($event)" (removedCallback)="removedCompleted($event)">
+            </app-file-upload>
+          </div>
+        </div>
+        <div class="p-d-flex p-jc-end">
+          <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+        </div>
+      </form>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-lg-6 p-md-12 p-sm-12">
+    <p-fieldset legend="Şifre Değiştir">
+      <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" autocomplete="off">
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label required class="pull-left">Şimdiki Şifre</label>
+            <input type="password" formControlName="oldPassword" class="full-width" autocomplete="off" pInputText/>
+            <app-validator [control]="changePasswordFormControls.oldPassword"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label required class="pull-left">Yeni Şifre</label>
+            <input type="password" formControlName="newPassword" class="full-width" autocomplete="off" pInputText />
+            <app-validator [control]="changePasswordFormControls.newPassword"></app-validator>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label required class="pull-left">Yeni Şifre Tekrar</label>
+            <input type="password" formControlName="newPasswordConfirm" class="full-width" autocomplete="off" pInputText />
+            <app-validator [control]="changePasswordFormControls.newPasswordConfirm"></app-validator>
+          </div>
+        </div>
+        <div class="p-d-flex p-jc-end">
+          <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+        </div>
+      </form>
+    </p-fieldset>
+  </div>
+</div>

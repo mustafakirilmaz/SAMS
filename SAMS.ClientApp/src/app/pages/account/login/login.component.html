@@ -1,0 +1,39 @@
+<div class="login-body">
+    <div class="card login-panel p-fluid">
+        <div class="login-panel-content">
+            <form [formGroup]="loginForm" method="post" (ngSubmit)="login()">
+                <div class="p-grid">
+                    <div class="p-col-12 p-sm-12 p-md-12 logo-container" style="text-align: center;">
+                        <img src="assets/layout/images/logotayp2TR.png"/>
+                        <span class="guest-sign-in">Hoşgeldiniz. Lütfen aşağıdaki bilgileri giriniz</span>
+                    </div>
+                    <div class="p-col-12 username-container">
+                        <label>Eposta</label>
+                        <div class="login-input">
+                            <input type="text" formControlName="email" pInputText>
+                        </div>
+                    </div>
+                    <div class="p-col-12 password-container">
+                        <label>Şifre</label>
+                        <div class="login-input">
+                            <input type="password" formControlName="password" promptLabel="Şifre giriniz"
+                            weakLabel="Zayıf" mediumLabel="Orta" strongLabel="Güçlü" autocomplete="off" pPassword />
+                        </div>
+                    </div>
+
+                    <div class="p-col-12 p-sm-6 p-md-6">
+                        <button type="submit" icon="pi pi-check" class="p-ripple p-button p-component" label="Giriş" pButton></button>
+                    </div>
+                    <div class="p-col-12 p-sm-6 p-md-6">
+                        <button type="button" icon="pi pi-key" class="p-ripple p-button p-component" label="Şifremi unuttum" [routerLink]="['/forget-password']"
+                            pButton></button>
+                    </div>
+                    <!-- <div class="p-col-12 p-sm-12 p-md-12">
+                        <button type="button" icon="pi pi-user-plus" class="p-button-success p-ripple p-button p-component" label="Kayıt ol" [routerLink]="['/register']"
+                            pButton></button>
+                    </div> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

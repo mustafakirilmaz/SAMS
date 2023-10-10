@@ -1,0 +1,123 @@
+<div class="layout-topbar">
+
+    <!-- <a class="layout-right-panel-button layout-topbar-icon" (click)="app.onRightMenuClick($event)" href="#">
+            <i class="pi pi-ellipsis-v"></i>
+    </a> -->
+
+    <a href="#" class="layout-menu-button layout-topbar-icon" (click)="app.onMenuButtonClick($event)">
+        <i class="pi pi-bars"></i>
+    </a>
+
+    <a href="#" class="layout-topbar-logo">
+        <img id="topbar-logo" src="assets/layout/images/logo-white.png">
+    </a>
+
+    <ul class="topbar-menu">
+        <li class="user-profile" [ngClass]="{'active-topmenuitem fadeInDown': app.topbarUserMenuActive}">
+            <a href="#" (click)="app.onTopbarUserMenuButtonClick($event)" *ngIf="!app.inlineUser">
+                <img src="{{ ch.getFullUrl(ch.currentUser.imageUrl) }}"
+                    *ngIf="!ch.isNullOrUndefined(ch.currentUser.imageUrl)"
+                    alt="{{ch.currentUser.name + ' ' + ch.currentUser.surname}}" style="border-radius: 30px"
+                    onerror="this.onerror=null; this.src='assets/layout/images/default-avatar.png'" />
+                <img src="assets/layout/images/default-avatar.png" *ngIf="ch.isNullOrUndefined(ch.currentUser.imageUrl)"
+                    alt="{{ch.currentUser.name + ' ' + ch.currentUser.surname}}" style="border-radius: 30px"
+                    onerror="this.onerror=null; this.src='assets/layout/images/default-avatar.png'" />
+                <div class="layout-profile-userinfo">
+                    <span class="layout-profile-name">{{ch.currentUser.name}}</span>
+                    <span class="layout-profile-role">{{ch.currentUser.surname}}</span>
+                </div>
+            </a>
+            <ul class="fadeInDown">
+                <li>
+                    <a href="javascript:" (click)="goProfile()">
+                        <i class="pi pi-fw pi-user"></i>
+                        <span>Profil</span>
+                    </a>
+                </li>
+                <!-- <li *roles="'Admin|Superuser'">
+                    <a href="javascript:" (click)="goSettings()">
+                        <i class="pi pi-fw pi-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li *roles="'Admin'">
+                    <a href="javascript:" (click)="openJobs()">
+                        <i class="pi pi-fw pi-calendar-times"></i>
+                        <span>Jobs</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="javascript:" (click)="changeRole()" *ngIf="ch.currentUser.roles.length>1">
+                        <i class="pi pi-fw pi-refresh"></i>
+                        <span>Rol Değiştir</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:" (click)="logout()">
+                        <i class="pi pi-fw pi-arrow-circle-left"></i>
+                        <span>Çıkış</span>
+                    </a>
+                </li>
+                <!-- <li>
+                        <a href="#">
+                            <i class="pi pi-fw pi-envelope"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="pi pi-fw pi-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li> -->
+            </ul>
+        </li>
+        <!-- <li [ngClass]="{'active-topmenuitem fadeInDown': app.topbarNotificationMenuActive}">
+                <a href="#" class="layout-topbar-icon" (click)="app.onTopbarNotificationMenuButtonClick($event)">
+                    <i class="topbar-icon pi pi-fw pi-bell"></i>
+                </a>
+                <ul class="fadeInDown">
+                    <li role="menuitem">
+                        <a href="#"><img src="assets/layout/images/avatar-1.png" alt="">
+                            <div class="topbar-menu-info">
+                                <span class="topbar-menu-name">Bithika Abhedananda</span>
+                                <span class="topbar-menu-role">User interface review is done.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#"><img src="assets/layout/images/avatar-2.png" alt="">
+                            <div class="topbar-menu-info">
+                                <span class="topbar-menu-name">Dai Jiang</span>
+                                <span class="topbar-menu-role">Uh, we have sort of a problem here.</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#"><img src="assets/layout/images/avatar-3.png" alt="">
+                            <div class="topbar-menu-info">
+                                <span class="topbar-menu-name">Karlien Nijhuis</span>
+                                <span class="topbar-menu-role">You apparently didn’t put the thing</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#"><img src="assets/layout/images/avatar-4.png" alt="">
+                            <div class="topbar-menu-info">
+                                <span class="topbar-menu-name">Tom Chun</span>
+                                <span class="topbar-menu-role">Please check the files</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#"><img src="assets/layout/images/avatar-5.png" alt="">
+                            <div class="topbar-menu-info">
+                                <span class="topbar-menu-name">Maria Trofimova</span>
+                                <span class="topbar-menu-role">Meeting reports attached.</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+        </li> -->
+    </ul>
+</div>

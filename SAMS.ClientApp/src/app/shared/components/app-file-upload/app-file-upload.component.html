@@ -1,0 +1,15 @@
+<p-fileUpload name="formFiles[]" [url]="uploadUrl" method="post" (onUpload)="onUpload()" [multiple]="multiple"
+  [disabled]="disabled" [accept]="accept" [auto]="auto" withCredentials mode="advanced"
+  showUploadButton="true" showCancelButton="true" chooseLabel="Resim Seç" uploadLabel="Yükle" cancelLabel="İptal">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles" class="p-mb-1">
+        <button pButton type="button" icon="pi pi-trash" pTooltip="Sil" tooltipPosition="bottom"
+          class="p-button-rounded p-button-warning" (click)="deleteFile(file)" *ngIf="!disabled"></button>
+        <button pButton type="button" pRipple icon="pi pi-eye" pTooltip="Göster" tooltipPosition="bottom"
+          class="p-button-rounded p-button-success p-mr-2 p-ml-2" (click)="showFile(file)"></button>
+        <button pButton type="button" label="{{file.name}}" class="p-button-text" (click)="showFile(file)"></button>
+      </li>
+    </ul>
+  </ng-template>
+</p-fileUpload>

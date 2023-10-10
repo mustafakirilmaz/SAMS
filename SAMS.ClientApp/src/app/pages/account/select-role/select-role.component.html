@@ -1,0 +1,17 @@
+<div class="login-body">
+    <div class="card login-panel p-fluid">
+        <div class="login-panel-content">
+            <div class="p-grid">
+                <div class="p-col-12 p-sm-12 p-md-12 logo-container" style="text-align: center;">
+                    <img src="assets/layout/images/logotayp2TR.png"/>
+                    <span class="guest-sign-in">Sisteme giriş yapmak istediğiniz rolü seçiniz</span>
+                </div>
+                <div class="p-col-12 username-container" *ngFor="let role of roles">
+                    <div class="login-input">
+                        <button pButton type="button" label="{{role.description}}" (click)="setSelectedRole(role.role)" class="p-button-warning"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+
+<p-table #dt [id]="dataTableId" *ngIf="!ch.isNullOrUndefined(getDataTableInfo())" [value]="getDataTableInfo().gridData" autoLayout="true" (onLazyLoad)="callGridRefresh(dt)"
+  [dataKey]="dataKey" [resizableColumns]="resizableColumns" [reorderableColumns]="reorderableColumns"
+  [paginator]="isDataExists() && paginator" paginatorPosition="bottom" [lazy]="true" [responsive]="true"
+  [rows]="paginator==true?10:0" [columns]="getDataTableInfo().selectedColumns"
+  [totalRecords]="getDataTableInfo().totalRecords" [rowsPerPageOptions]="ch.globals.pageSizeOptions"
+  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [sortOrder]="-1"
+  [ngClass]="{'display-none': !getDataTableInfo().displayGrid }"
+  styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines" [resizableColumns]="true">
+  <ng-template pTemplate="caption" *ngIf="columnSelection || exportExcelButton">
+    <div class="ui-helper-clearfix" *ngIf="isDataExists()">
+      <p-multiSelect optionLabel="header" selectedItemsLabel="{0} columns selected" class="pull-left"
+        [style]="{minWidth: '200px'}" defaultLabel="Select column" [options]="getDataTableInfo().cols"
+        [(ngModel)]="getDataTableInfo().selectedColumns"
+        (onChange)="gridColumnsReorder(getDataTableInfo())" *ngIf="columnSelection"></p-multiSelect>
+      <button type="button" pButton icon="pi pi-file-excel" label="Excel" (click)="callGridRefresh()"
+        class="p-button-info p-button-outlined p-button-sm" style="float:right" *ngIf="exportExcelButton"></button>
+      <!-- <button type="button" pButton icon="pi pi-print" label="Print" (click)="printTable()"
+        class="p-button-info p-button-outlined p-button-sm p-mr-2" style="float:right" *ngIf="exportPdfButton"></button> -->
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <ng-container *ngFor="let col of getDataTableInfo().selectedColumns">
+        <ng-container [ngSwitch]="col.type">
+          <th *ngSwitchCase="columnTypeEnum.Checkbox" style="white-space: pre-wrap;" pReorderableColumn>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox> {{col.header}}
+          </th>
+          <th *ngSwitchCase="columnTypeEnum.Template" style="white-space: pre-wrap;" [pSortableColumn]="null"
+            pResizableColumn>
+            {{col.header}}
+          </th>
+          <th *ngSwitchCase="columnTypeEnum.Operation" style="white-space: pre-wrap; width: 200px;">
+            {{col.header}}
+          </th>
+          <th *ngSwitchDefault style="white-space: pre-wrap;" [pSortableColumn]="reorderableColumns? col.field: null"
+            pResizableColumn>
+            {{col.header}}
+            <p-sortIcon *ngIf="reorderableColumns" [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-container>
+      </ng-container>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <ng-container *ngFor="let col of getDataTableInfo().selectedColumns">
+        <ng-container [ngSwitch]="col.type">
+
+          <td *ngSwitchCase="columnTypeEnum.Template" style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span>
+            <ng-content *ngTemplateOutlet="cellTemplatesMap[col.field]; context : {rowData : rowData}"></ng-content>
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Operation" style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span>
+            <ng-content *ngTemplateOutlet="cellTemplatesMap[col.field]; context : {rowData : rowData}"></ng-content>
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Checkbox" style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span>
+            <p-tableCheckbox [value]="rowData" [disabled]="rowData.canSelected === false"
+              pTooltip="{{rowData.canNotSelectedReason}}"></p-tableCheckbox>
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Boolean" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{rowData[col.field] === true ? 'Evet' : 'Hayır'}}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Percent" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> %{{(rowData[col.field] * 100).toLocaleString('tr-TR')}}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Number" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{ rowData[col.field].toLocaleString( 'tr-TR' ) }}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Money" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{ rowData[col.field].toLocaleString('tr-TR') }}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.Date" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{rowData[col.field]|date:'dd-MM-yyyy'}}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.DateTime" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{rowData[col.field]|date:'dd-MM-yyyy HH:mm:ss'}}
+          </td>
+
+          <td *ngSwitchCase="columnTypeEnum.TextTemplate" [ngClass]="getColoring(col, rowData,col.field)">
+            <span class="p-column-title">{{col.header}}</span>
+            <ng-content *ngTemplateOutlet="cellTemplatesMap[col.field]; context : {rowData : rowData}"></ng-content>
+          </td>
+
+          <td *ngSwitchDefault class="ui-resizable-column" [ngClass]="getColoring(col, rowData,col.field)"
+            style="white-space: pre-wrap;">
+            <span class="p-column-title">{{col.header}}</span> {{rowData[col.field]}}
+          </td>
+        </ng-container>
+
+      </ng-container>
+    </tr>
+  </ng-template>
+
+
+  <ng-template pTemplate="summary" *ngIf="totalRecordSummary">
+    <div *ngIf="isDataExists()">Toplam {{getDataTableInfo().totalRecords}} kayıt bulunmaktadır.</div>
+    <div *ngIf="!isDataExists()" style="color:#c00000;">Arama kriterlerine uygun kayıt bulunmamaktadır.</div>
+  </ng-template>
+</p-table>

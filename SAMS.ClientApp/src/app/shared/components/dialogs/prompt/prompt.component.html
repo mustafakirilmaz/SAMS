@@ -1,0 +1,7 @@
+<textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="value" class="full-width" *ngIf="multiline"></textarea>
+<input type="text" pInputText class="full-width" [(ngModel)]="value" *ngIf="!multiline">
+
+<div class="pull-right mt20 mb30">
+  <button pButton type="submit" label="İptal" icon="fa fa-times" class="ui-button-danger" (click)="cancel()"></button>
+  <button pButton type="button" label="Tamam" icon="fa fa-check" class="ui-button-default ml5" (click)="ok()"></button>
+</div>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RepositoryContracts\**" />
+    <Compile Remove="UnitOfWork\Repos\**" />
+    <EmbeddedResource Remove="RepositoryContracts\**" />
+    <EmbeddedResource Remove="UnitOfWork\Repos\**" />
+    <None Remove="RepositoryContracts\**" />
+    <None Remove="UnitOfWork\Repos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAMS.Common\SAMS.Common.csproj" />
+    <ProjectReference Include="..\SAMS.Data\SAMS.Data.csproj" />
+  </ItemGroup>
+
+</Project>

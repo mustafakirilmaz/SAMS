@@ -1,0 +1,13 @@
+<router-outlet></router-outlet>
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<!-- <button id="printButton" type="button" [printSectionId]="'print-section'" ngxPrint [useExistingCss]="true"
+    style="display: none;"></button> -->
+
+<!-- <ngx-ui-loader [fgsColor]="loaderConfig.fgsColor" [overlayColor]="loaderConfig.overlayColor"
+    [fgsSize]="loaderConfig.fgsSize" [fgsType]="loaderConfig.fgsType" [hasProgressBar]="loaderConfig.hasProgressBar">
+</ngx-ui-loader> -->
+
+<p-blockUI [blocked]="true" *ngIf="globals.displayLoader">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="4" animationDuration=".5s"></p-progressSpinner>
+</p-blockUI>
