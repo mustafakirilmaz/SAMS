@@ -12,7 +12,13 @@ namespace SAMS.Data
         public DbSet<ErrorLog> ErrorLog { get; set; }
 
 
-        public DbSet<User> Users { get; set; }
+
+		public DbSet<City> Cities { get; set; }
+		public DbSet<Town> Towns { get; set; }
+		public DbSet<District> Districts { get; set; }
+
+
+		public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserLoginHistory> UserLoginHistories { get; set; }
