@@ -73,6 +73,24 @@ namespace SAMS.Server.Controllers
         {
             return await commonService.GetUsers(searchTerm);
         }
-        #endregion
-    }
+
+		[HttpGet("cities")]
+		public async Task<ServiceResult> GetCities()
+		{
+			return await commonService.GetCities();
+		}
+
+		[HttpGet("towns")]
+		public async Task<ServiceResult> GetTowns(int cityCode)
+		{
+			return await commonService.GetTowns(cityCode);
+		}
+
+		[HttpGet("districts")]
+		public async Task<ServiceResult> GetDistricts(int townCode)
+		{
+			return await commonService.GetDistricts(townCode);
+		}
+		#endregion
+	}
 }

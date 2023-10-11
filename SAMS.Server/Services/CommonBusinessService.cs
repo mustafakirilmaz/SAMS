@@ -86,8 +86,58 @@ namespace SAMS.Server.Services
             return new ServiceResult<List<SelectItem>>(result);
         }
 
-        #region privates
-        private async Task<ServiceResult<List<SelectItem>>> GetEnumsAsSelectList<T>()
+        /// <summary>
+        /// İlleri getir
+        /// </summary>
+        /// <returns></returns>
+		public async Task<ServiceResult<List<SelectItem>>> GetCities()
+		{
+			var cities = (await UnitOfWork.GetRepository<City>().GetAll()).OrderBy(d => d.Name).ToList();
+			var result = cities.Select(d => new SelectItem
+			{
+				value = d.Code,
+				label = d.Name
+			}).ToList();
+
+			return new ServiceResult<List<SelectItem>>(result);
+		}
+
+        /// <summary>
+        /// İlçeleri getir
+        /// </summary>
+        /// <param name="cityCode"></param>
+        /// <returns></returns>
+		public async Task<ServiceResult<List<SelectItem>>> GetTowns(int cityCode)
+		{
+			var towns = (await UnitOfWork.GetRepository<Town>().GetAll(d => d.CityCode == cityCode)).OrderBy(d => d.Name).ToList();
+			var result = towns.Select(d => new SelectItem
+			{
+				value = d.Code,
+				label = d.Name
+			}).ToList();
+
+			return new ServiceResult<List<SelectItem>>(result);
+		}
+
+        /// <summary>
+        /// Mahalleleri getir
+        /// </summary>
+        /// <param name="townCode"></param>
+        /// <returns></returns>
+		public async Task<ServiceResult<List<SelectItem>>> GetDistricts(int townCode)
+		{
+			var towns = (await UnitOfWork.GetRepository<District>().GetAll(d => d.TownCode == townCode)).OrderBy(d => d.Name).ToList();
+			var result = towns.Select(d => new SelectItem
+			{
+				value = d.Code,
+				label = d.Name
+			}).ToList();
+
+			return new ServiceResult<List<SelectItem>>(result);
+		}
+
+		#region privates
+		private async Task<ServiceResult<List<SelectItem>>> GetEnumsAsSelectList<T>()
         {
             var items = EnumHelper<T>.GetSelectListAsDescription().OrderBy(x => x.value).ToList();
             var result = new ServiceResult<List<SelectItem>>

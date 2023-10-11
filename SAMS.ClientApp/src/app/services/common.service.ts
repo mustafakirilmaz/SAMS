@@ -20,26 +20,20 @@ export class CommonService {
         return this.httpHelper.delete('files', null, params, null);
     }
 
-    getDeviceTypes() {
-        return this.httpHelper.get<SelectItem[]>('common', 'device-types');
-    }
-
-    getDeviceEnum() {
-        return this.httpHelper.get<SelectItem[]>('common', 'device-enums');
-    }
-
     getUsers(searchTerm) {
         const params = this.ch.createParams({ searchTerm: searchTerm });
         return this.httpHelper.get<SelectItem[]>('common', 'users', params);
     }
 
-    getDevices(keywords = null) {
-        const params = this.ch.createParams({ keywords: keywords });
-        return this.httpHelper.get<SelectItem[]>('common', 'devices', params);
+    getCities() {
+        return this.httpHelper.get<SelectItem[]>('common', 'cities');
     }
 
-    getDeviceProperties(keywords, parentId = null) {
-        const params = this.ch.createParams({ keywords: keywords, parentId: parentId });
-        return this.httpHelper.get<SelectItem[]>('common', 'device-properties', params);
+    getTowns(cityCode: number) {
+        return this.httpHelper.get<SelectItem[]>('common', 'towns', this.ch.createParams({ 'cityCode': cityCode }));
+    }
+
+    getDistricts(townCode: number) {
+        return this.httpHelper.get<SelectItem[]>('Common', 'districts', this.ch.createParams({ 'townCode': townCode }));
     }
 }

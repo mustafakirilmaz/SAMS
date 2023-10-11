@@ -28,5 +28,25 @@ namespace SAMS.Server.ServiceContracts
         /// <param name="searchTerm"></param>
         /// <returns></returns>
         Task<ServiceResult<List<SelectItem>>> GetUsers(string searchTerm);
-    }
+
+        /// <summary>
+        /// İlleri getir
+        /// </summary>
+        /// <returns></returns>
+		Task<ServiceResult<List<SelectItem>>> GetCities();
+
+        /// <summary>
+        /// İlçeleri Getir
+        /// </summary>
+        /// <param name="cityCode"></param>
+        /// <returns></returns>
+		Task<ServiceResult<List<SelectItem>>> GetTowns(int cityCode);
+
+        /// <summary>
+        /// Mahalleleri getir
+        /// </summary>
+        /// <param name="townCode"></param>
+        /// <returns></returns>
+		Task<ServiceResult<List<SelectItem>>> GetDistricts(int townCode);
+	}
 }
