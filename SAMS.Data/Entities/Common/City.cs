@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SAMS.Data
 {
-    [Table("Cities", Schema = "Common")]
+    [Table("Cities", Schema = "common")]
     public class City : AuditableEntity
     {
         public string Name { get; set; }
