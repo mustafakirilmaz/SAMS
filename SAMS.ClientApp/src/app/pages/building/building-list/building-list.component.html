@@ -1,0 +1,61 @@
+<app-page-header [caption]="'Bina Listesi'"></app-page-header>
+
+<p-panel header="Arama Kriterleri" [toggleable]="true">
+  <form [formGroup]="ch.getFilterForm(gridName)" (ngSubmit)="ch.setGridRefreshAsSearch(gridName);gridRefresh();">
+    <div class="p-fluid p-formgrid p-grid">
+      <!-- <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Site Adı</label>
+        <input type="text" formControlName="siteName" maxlength="50" pInputText>
+      </div> -->
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Bina Adı</label>
+        <input type="text" formControlName="name" maxlength="50" pInputText>
+      </div>    
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">İl</label>
+        <app-city [parentForm]="ch.getFilterForm(gridName)" [id]="'cityCode'"></app-city>
+        <app-validator [control]="ch.getFilterForm(gridName).cityCode"></app-validator>
+      </div>   
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">İlçe</label>
+        <app-town [id]="'townCode'" [cityCode]="'cityCode'" [parentForm]="ch.getFilterForm(gridName)"></app-town>
+        <app-validator [control]="ch.getFilterForm(gridName).townCode"></app-validator>
+      </div>    
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Mahalle</label>
+        <app-district [id]="'districtCode'" [townCode]="'townCode'" [parentForm]="ch.getFilterForm(gridName)"></app-district>
+        <app-validator [control]="ch.getFilterForm(gridName).districtCode"></app-validator>
+      </div>
+    </div>
+    <div class="p-d-flex p-jc-end">      
+      <button pButton type="button" label="Ekle" icon="pi pi-plus" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="openBuildingModal()"></button>
+      <button pButton type="button" label="Temizle" icon="pi pi-refresh" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="ch.clearFilters(gridName)"></button>
+      <button pButton type="submit" label="Ara" icon="pi pi-search" iconPos="left"></button>
+    </div>
+
+  </form>
+</p-panel>
+
+<p-dialog [(visible)]="createBuildingModalVisible" [style]="{width: '50vw'}" (onHide)="onHideBuildingModal()">
+  <ng-template pTemplate="header">
+    <h3>Bina {{ ch.isNullOrUndefined(selectedBuilding) ? 'Ekle' : 'Düzenle' }}</h3>
+  </ng-template>
+  <app-building-detail [buildingId]="selectedBuilding?.id" (onBuildingSaved)="onBuildingSaved($event)" *ngIf="createBuildingModalVisible"></app-building-detail>
+</p-dialog>
+
+<p-panel header="Bina Listesi" styleClass="p-mt-2">
+  <app-grid (gridRefresh)="gridRefresh()" [dataTableId]="gridName">
+    <ng-template let-building="rowData" cellTemplate="units">
+      <button pButton pRipple icon="pi pi-sitemap" pTooltip="Bağımsız Bölümleri Listele" class="p-button-rounded p-button-help p-mr-2"
+      (click)="goToUnitList(building.id)"></button>
+    </ng-template>
+    <ng-template let-building="rowData" cellTemplate="operations">
+      <button pButton pRipple icon="pi pi-pencil" pTooltip="Düzenle" class="p-button-rounded p-button-success p-mr-2"
+        (click)="editBuilding(building)"></button>
+      <button pButton pRipple icon="pi pi-trash" pTooltip="Sil" class="p-button-rounded p-button-warning"
+        (click)="deleteBuilding(building.id)"></button>
+    </ng-template>
+  </app-grid>
+</p-panel>

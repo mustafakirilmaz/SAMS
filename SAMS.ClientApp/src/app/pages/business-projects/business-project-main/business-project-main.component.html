@@ -1,0 +1,24 @@
+<p-tabView [(activeIndex)]="index">
+    <p-tabPanel header="İşletme Projesi">
+        <ng-template pTemplate="content">
+            <app-business-project-detail [businessProjectId]="businessProjectId"></app-business-project-detail>
+        </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header="Giderler">
+        <ng-template pTemplate="content">
+            <equal-expense-detail [businessProjectId]="businessProjectId"></equal-expense-detail>
+
+        </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header="Özet">
+        <ng-template pTemplate="content">
+            <!-- <app-certification-list></app-certification-list> -->
+        </ng-template>
+    </p-tabPanel>
+    <div class="p-d-flex p-jc-end">
+        <button pButton type="button" label="Önceki" icon="pi pi-chevron-left" iconPos="left" class="p-m-2"
+            (click)="openPrev()" *ngIf="index > 0"></button>
+        <button pButton type="button" label="Kaydet ve İlerle" icon="pi pi-chevron-right" iconPos="right" class="p-m-2"
+            (click)="openNext()" *ngIf="index == 0"></button>
+    </div>
+</p-tabView>

@@ -1,0 +1,6 @@
+<form [formGroup]="parentForm">
+    <div>
+      <p-dropdown [formControlName]="id" [options]="cityFilter" (onChange)="onCityChange($event)"></p-dropdown>
+    </div>
+  </form>
+  

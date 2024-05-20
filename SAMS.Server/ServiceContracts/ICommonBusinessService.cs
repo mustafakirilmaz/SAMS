@@ -48,5 +48,41 @@ namespace SAMS.Server.ServiceContracts
         /// <param name="townCode"></param>
         /// <returns></returns>
 		Task<ServiceResult<List<SelectItem>>> GetDistricts(int townCode);
-	}
+
+        /// <summary>
+        /// Siteleri getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetSites();
+
+        /// <summary>
+        /// Binaları getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetBuildings();
+
+        /// <summary>
+        /// Eşit Gider Türlerini Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetEqualExpenseTypes();
+
+        /// <summary>
+        /// Oransal Gider Türlerini Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetProportionalExpenseTypes();
+
+        /// <summary>
+        /// Demirbaş Gider Türlerini Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetFixtureExpenseTypes();
+
+        /// <summary>
+        /// İşletme Projelerini Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetBusinessProjects();
+    }
 }

@@ -114,6 +114,12 @@ import { MultiSelectDirective } from './directives/multi-select.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseComponent } from './bases/base.component';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { CityComponent } from './components/city-town-district/city/city.component';
+import { TownComponent } from './components/city-town-district/town/town.component';
+import { DistrictComponent } from './components/city-town-district/district/district.component';
+
+
+import { SplitterModule } from 'primeng/splitter';
 
 registerLocaleData(localeTr, 'tr');
 
@@ -194,7 +200,8 @@ registerLocaleData(localeTr, 'tr');
         VirtualScrollerModule,
         BlockUIModule,
         ProgressSpinnerModule,
-        DividerModule
+        DividerModule,
+        SplitterModule,
     ],
     exports: [
         FormsModule,
@@ -289,6 +296,11 @@ registerLocaleData(localeTr, 'tr');
 
         RemovewhitespacesPipe,
         SafeHtmlPipe,
+        
+        CityComponent,
+        TownComponent,
+        DistrictComponent,
+        SplitterModule,
     ],
     declarations: [
         MenuLayoutComponent,
@@ -320,6 +332,10 @@ registerLocaleData(localeTr, 'tr');
 
         RemovewhitespacesPipe,
         SafeHtmlPipe,
+        
+        CityComponent,
+        TownComponent,
+        DistrictComponent,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'tr-TR', useClass: HashLocationStrategy },

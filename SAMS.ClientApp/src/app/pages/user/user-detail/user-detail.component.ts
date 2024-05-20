@@ -33,7 +33,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   getRoles() {
     this.cs.getRoles().subscribe(result => {
       if (this.ch.checkResult(result)) {
-        this.roles = this.ch.addUnselectedItem(result.data, 0);
+        this.roles = result.data;
       }
     });
   }

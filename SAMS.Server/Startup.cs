@@ -55,6 +55,13 @@ namespace SAMS.Server
             services.AddScoped<IAccountBusinessService, AccountBusinessService>();
             services.AddScoped<IUserBusinessService, UserBusinessService>();
             services.AddScoped<ICommonBusinessService, CommonBusinessService>();
+            services.AddScoped<ISiteBusinessService, SiteBusinessService>();
+            services.AddScoped<IBuildingBusinessService, BuildingBusinessService>();
+            services.AddScoped<IUnitBusinessService, UnitBusinessService>();
+            services.AddScoped<IBusinessProjectBusinessService, BusinessProjectBusinessService>();
+            services.AddScoped<IEqualExpenseBusinessService, EqualExpenseBusinessService>();
+            services.AddScoped<IProportionalExpenseBusinessService, ProportionalExpenseBusinessService>();
+            services.AddScoped<IFixtureExpenseBusinessService, FixtureExpenseBusinessService>();
             #endregion
 
             #region Other

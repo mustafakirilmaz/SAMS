@@ -1,0 +1,21 @@
+<form [formGroup]="proportionalExpenseForm" (ngSubmit)="saveProportionalExpense()">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold" required>İşletme Projesi</label>
+      <p-dropdown name="businessProjectId" [options]="businessProjects" formControlName="businessProjectId"></p-dropdown>
+    </div>
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold">Oransal Gider Türü</label>
+      <p-dropdown name="proportionalExpenseType" [options]="proportionalExpenseTypes" formControlName="proportionalExpenseType"></p-dropdown>      
+      <app-validator [control]="proportionalExpenseFormControls.proportionalExpenseType"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Tutar</label>
+      <input type="number" formControlName="cost" maxlength="255" pInputText>
+      <app-validator [control]="proportionalExpenseFormControls.cost"></app-validator>
+    </div>
+  </div>
+  <div class="p-d-flex p-jc-end p-mt-4">
+    <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+  </div>
+</form>

@@ -1,0 +1,33 @@
+<div class="p-col-12">
+  <p-panel header="İşletme Projesi Bilgileri">
+    <form [formGroup]="businessProjectForm" (ngSubmit)="saveBusinessProject()">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+          <label class="bold" required>İşletme Projesinin Ait Olduğu Bina</label>
+          <p-dropdown name="buildingId" [options]="buildings" formControlName="buildingId"></p-dropdown>
+          <app-validator [control]="businessProjectFormControls.buildingId"></app-validator>
+        </div>
+        <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-6">
+          <label class="bold" required>İşletme Projesinin Adı</label>
+          <input type="text" formControlName="name" maxlength="255" pInputText>
+          <app-validator [control]="businessProjectFormControls.name"></app-validator>
+        </div>
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+          <label class="bold" required>İşletme Projesinin Geçerlilik Başlangıç Tarihi</label>
+          <p-calendar formControlName="startDate" [readonlyInput]="false" yearNavigator="true" yearRange="2023:2050">
+          </p-calendar>
+          <app-validator [control]="businessProjectFormControls.startDate"></app-validator>
+        </div>
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+          <label class="bold" required>İşletme Projesinin Geçerlilik Bitiş Tarihi</label>
+          <p-calendar formControlName="endDate" [readonlyInput]="false" yearNavigator="true" yearRange="2023:2050">
+          </p-calendar>
+          <app-validator [control]="businessProjectFormControls.endDate"></app-validator>
+        </div>
+      </div>
+      <!-- <div class="p-d-flex p-jc-end p-mt-4">
+        <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+      </div> -->
+    </form>
+  </p-panel>
+</div>

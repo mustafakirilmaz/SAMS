@@ -1,0 +1,37 @@
+<form [formGroup]="unitForm" (ngSubmit)="saveUnit()">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold">Bağlı Olduğu Bina</label>
+      <p-dropdown name="buildingId" [options]="buildings" formControlName="buildingId"></p-dropdown>      
+      <app-validator [control]="unitFormControls.buildingId"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Bağımsız Bölüm Adı</label>
+      <input type="text" formControlName="name" maxlength="255" pInputText>
+      <app-validator [control]="unitFormControls.name"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Kat</label>
+      <input type="number" formControlName="floor" maxlength="3" pInputText>
+      <app-validator [control]="unitFormControls.floor"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Net M2</label>
+      <input type="number" formControlName="netSquareMeter" maxlength="3" pInputText>
+      <app-validator [control]="unitFormControls.netSquareMeter"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Brüt M2</label>
+      <input type="number" formControlName="grossSquareMeter" maxlength="3" pInputText>
+      <app-validator [control]="unitFormControls.grossSquareMeter"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Arsa Payı</label>
+      <input type="number" formControlName="shareOfLand" maxlength="3" pInputText>
+      <app-validator [control]="unitFormControls.shareOfLand"></app-validator>
+    </div>
+  </div>
+  <div class="p-d-flex p-jc-end p-mt-4">
+    <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+  </div>
+</form>

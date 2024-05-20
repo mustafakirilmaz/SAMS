@@ -1,0 +1,12 @@
+<app-page-header [caption]="'İşletme Projesi'"></app-page-header>
+<p-card>
+    <div *roles="'Admin|Superuser'" style="margin-top: -2rem;">
+        <p-messages severity="info" styleClass="p-mb-2" *ngIf="doctorInfo != null">
+            <ng-template pTemplate>
+                <i class="pi pi-user"></i>
+                <div class="p-ml-2">{{ getBusinessProjectInfo() }}</div>
+            </ng-template>
+        </p-messages>
+    </div>
+    <p-steps [model]="items" [readonly]="false"></p-steps>
+</p-card>

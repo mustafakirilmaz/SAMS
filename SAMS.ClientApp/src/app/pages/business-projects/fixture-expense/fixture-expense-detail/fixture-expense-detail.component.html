@@ -1,0 +1,28 @@
+<form [formGroup]="fixtureExpenseForm" (ngSubmit)="saveFixtureExpense()">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold" required>İşletme Projesi</label>
+      <p-dropdown name="businessProjectId" [options]="businessProjects" formControlName="businessProjectId"></p-dropdown>
+    </div>
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold" required>Demirbaş Gideri Türü</label>
+      <p-dropdown name="fixtureExpenseType" [options]="fixtureExpenseTypes" formControlName="fixtureExpenseType"></p-dropdown>      
+      <app-validator [control]="fixtureExpenseFormControls.fixtureExpenseType"></app-validator>
+    </div>
+    
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12" *ngIf="fixtureExpenseFormControls.fixtureExpenseType.value===5">
+      <label class="bold" required>Diğer Demirbaş Türü Açıklaması</label>
+      <input type="text" formControlName="description" maxlength="255" pInputText>
+      <app-validator [control]="fixtureExpenseFormControls.description"></app-validator>
+    </div>
+    
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Tutar</label>
+      <input type="number" formControlName="cost" maxlength="255" pInputText>
+      <app-validator [control]="fixtureExpenseFormControls.cost"></app-validator>
+    </div>
+  </div>
+  <div class="p-d-flex p-jc-end p-mt-4">
+    <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+  </div>
+</form>

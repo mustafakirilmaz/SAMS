@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+#sol-panel {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    flex: 1;
+    border: 1px solid #000;
+    margin: 5px;
+}
+
+#sag-panel {
+    flex: 1;
+    border: 1px solid #000;
+    margin: 5px;
+}

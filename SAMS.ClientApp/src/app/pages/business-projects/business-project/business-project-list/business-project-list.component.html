@@ -1,0 +1,64 @@
+<app-page-header [caption]="'İşletme Projesi Listesi'"></app-page-header>
+
+<p-panel header="Arama Kriterleri" [toggleable]="true">
+  <form [formGroup]="ch.getFilterForm(gridName)" (ngSubmit)="ch.setGridRefreshAsSearch(gridName);gridRefresh();">
+    <div class="p-fluid p-formgrid p-grid">
+      <!-- <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Bağlı Olduğu Site</label>
+        <p-dropdown name="siteId" [options]="sites" formControlName="siteId"></p-dropdown>
+      </div> -->
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Bağlı Olduğu Bina</label>
+        <p-dropdown name="buildingId" [options]="buildings" formControlName="buildingId"></p-dropdown>
+      </div>
+    </div>
+    <div class="p-d-flex p-jc-end">
+      <button pButton type="button" label="Ekle" icon="pi pi-plus" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="openBusinessProjectModal()"></button>
+      <button pButton type="button" label="Temizle" icon="pi pi-refresh" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="ch.clearFilters(gridName)"></button>
+      <button pButton type="submit" label="Ara" icon="pi pi-search" iconPos="left"></button>
+    </div>
+
+  </form>
+</p-panel>
+
+<p-dialog [(visible)]="createBusinessProjectModalVisible" [style]="{width: '50vw'}"
+  (onHide)="onHideBusinessProjectModal()">
+  <ng-template pTemplate="header">
+    <h3>İşletme Projesi {{ ch.isNullOrUndefined(selectedBusinessProject) ? 'Ekle' : 'Düzenle' }}</h3>
+  </ng-template>
+  <app-business-project-detail [businessProjectId]="selectedBusinessProject?.id"
+    (onBusinessProjectSaved)="onBusinessProjectSaved($event)"
+    *ngIf="createBusinessProjectModalVisible"></app-business-project-detail>
+</p-dialog>
+
+<p-panel header="İşletme Projesi Listesi" styleClass="p-mt-2">
+  <app-grid (gridRefresh)="gridRefresh()" [dataTableId]="gridName">
+    <ng-template let-businessProject="rowData" cellTemplate="details">
+      <button pButton pRipple icon="pi pi-book" pTooltip="Eşit Giderler"
+        class="p-element p-ripple p-button-rounded p-button-primary p-button-text p-button p-component p-button-icon-only"
+        (click)="showEqualExpenseListDialog(businessProject)"></button>
+      <button pButton pRipple icon="pi pi-percentage" pTooltip="Oransal Giderler"
+        class="p-element p-ripple p-button-rounded p-button-success p-button-text p-button p-component p-button-icon-only"
+        (click)="goToProportionalExpenses(businessProject.id)"></button>
+      <button pButton pRipple icon="pi pi-briefcase" pTooltip="Demirbaş Giderleri"
+        class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
+        (click)="goToFixtureExpenses(businessProject.id)"></button>
+    </ng-template>
+    <ng-template let-businessProject="rowData" cellTemplate="operations">
+      <button pButton pRipple icon="pi pi-pencil" pTooltip="Düzenle" class="p-button-rounded p-button-success p-mr-2"
+        (click)="editBusinessProject(businessProject)"></button>
+      <button pButton pRipple icon="pi pi-trash" pTooltip="Sil" class="p-button-rounded p-button-warning"
+        (click)="deleteBusinessProject(businessProject.id)"></button>
+    </ng-template>
+  </app-grid>
+</p-panel>
+
+<p-dialog [(visible)]="showEqualExpenseDialog" [style]="{width: '50vw'}" (onHide)="onHideEqualExpenseModal()">
+  <ng-template pTemplate="header">
+    <h3>Eşit Giderler</h3>
+  </ng-template>
+  <app-equal-expense-list [businessProjectId]="selectedBusinessProject?.id"
+    *ngIf="showEqualExpenseDialog"></app-equal-expense-list>
+</p-dialog>

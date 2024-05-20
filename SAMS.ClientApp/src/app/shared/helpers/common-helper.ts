@@ -46,23 +46,6 @@ export class CommonHelper {
   constructor(public messageHelper: MessageHelper, private globalVariables: GlobalVariables, public formBuilder: FormBuilder, private datePipe: DatePipe, private jwtHelper: JwtHelperService, private router: Router, private route: ActivatedRoute, private loaderService: NgxUiLoaderService, private constants: Constants) { }
 
   /**
-    * Dropdownlist için ilk element ekler.
-    * @param selectItemList İlk element eklenilecek liste.
-    * @param itemTextType Eklenilecek metnin türü => 1: "Lütfen Seçiniz",  2: "Tümü"
-  */
-  addUnselectedItem(selectItemList: SelectItem[], itemTextType: number, customText = ''): SelectItem[] {
-    // const itemList = selectItemList.slice(0, selectItemList.length);
-    // if (itemTextType === 1) {
-    //   itemList.unshift({ value: null, label: 'Lütfen Seçiniz' });
-    // } else if (itemTextType === 2) {
-    //   itemList.unshift({ value: null, label: 'Tümü' });
-    // } else if (itemTextType === 3) {
-    //   itemList.unshift({ value: null, label: customText });
-    // }
-    return selectItemList;
-  }
-
-  /**
     * Enum'daki tüm değerleri ve description'ları SelectItem array'e dönüştürür.
     * @param enumObj Değerleri alınacak enum.
     * @param descriptions Enum'a ait description değerleri.

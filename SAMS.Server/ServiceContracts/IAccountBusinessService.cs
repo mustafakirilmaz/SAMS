@@ -87,20 +87,12 @@ namespace SAMS.Server.ServiceContracts
         /// <returns></returns>
         Task<ServiceResult<long?>> UpdateProfile(UserDto userDto);
 
-        /// <summary>
-        /// Kullanıcı üye olma
-        /// </summary>
-        /// <param name="userDto"></param>
-        /// <returns></returns>
-        Task<ServiceResult<long?>> Register(RegisterUserDto userDto);
+        ///// <summary>
+        ///// Kullanıcı üye olma
+        ///// </summary>
+        ///// <param name="userDto"></param>
+        ///// <returns></returns>
+        //Task<ServiceResult<long?>> Register(RegisterUserDto userDto);
 
-        /// <summary>
-        /// Edevlet kullanıcısı sistemde ekli değilse kaydını yapar
-        /// </summary>
-        /// <param name="tckn"></param>
-        /// <param name="ad"></param>
-        /// <param name="soyad"></param>
-        /// <returns></returns>
-        Task<ServiceResult<UserInfoDto>> GetEdevletUser(string tckn, string ad, string soyad);
     }
 }

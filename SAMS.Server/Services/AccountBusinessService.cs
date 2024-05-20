@@ -247,7 +247,7 @@ namespace SAMS.Server.Services
         /// <returns></returns>
         public async Task<ServiceResult<bool>> ActivateUserWithOtpCode(CheckUserOtpDto model)
         {
-            var user = await UnitOfWork.GetRepository<User>().Get(d => d.Email == model.Email && d.PasswordResetOtpCode == model.OtpCode && !d.IsDeleted, disableTracking: false);
+            var user = await UnitOfWork.GetRepository<User>().Get(d => d.Email == model.Email && d.PasswordResetOtpCode == model.OtpCode && !d.IsDeleted);
             if (user == null)
             {
                 return new ServiceResult<bool>(false, "Geçersiz istek", ResultType.Error);
@@ -311,109 +311,56 @@ namespace SAMS.Server.Services
         /// </summary>
         /// <param name="registerDto"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<long?>> Register(RegisterUserDto registerDto)
-        {
-            var userRepo = UnitOfWork.GetRepository<User>();
-            var userRoleRepo = UnitOfWork.GetRepository<UserRole>();
-            User user = await userRepo.Get(d => d.Email == registerDto.Email && !d.IsDeleted);
+        //public async Task<ServiceResult<long?>> Register(RegisterUserDto registerDto)
+        //{
+        //    var userRepo = UnitOfWork.GetRepository<User>();
+        //    var userRoleRepo = UnitOfWork.GetRepository<UserRole>();
+        //    User user = await userRepo.Get(d => d.Email == registerDto.Email && !d.IsDeleted);
 
-            if (user != null)
-            {
-                return new ServiceResult<long?>(null, "Email addresi kullanımda", ResultType.Error);
-            }
+        //    if (user != null)
+        //    {
+        //        return new ServiceResult<long?>(null, "Email addresi kullanımda", ResultType.Error);
+        //    }
 
-            if (registerDto.Password != registerDto.PasswordConfirm)
-            {
-                return new ServiceResult<long?>(null, "Girilen şifreler eşleşmiyor", ResultType.Error);
-            }
+        //    if (registerDto.Password != registerDto.PasswordConfirm)
+        //    {
+        //        return new ServiceResult<long?>(null, "Girilen şifreler eşleşmiyor", ResultType.Error);
+        //    }
 
-            user = ReflectionHelper.CloneObject<RegisterUserDto, User>(registerDto);
-            user.Password = PasswordHelper.HashPassword(registerDto.Password);
+        //    user = ReflectionHelper.CloneObject<RegisterUserDto, User>(registerDto);
+        //    user.Password = PasswordHelper.HashPassword(registerDto.Password);
 
-            Random generator = new Random();
-            user.PasswordResetOtpCode = generator.Next(0, 1000000).ToString("D6");
-            user.IsActive = false;
+        //    Random generator = new Random();
+        //    user.PasswordResetOtpCode = generator.Next(0, 1000000).ToString("D6");
+        //    user.IsActive = false;
 
-            var result = userRepo.Add(user);
-            await UnitOfWork.SaveChangesAsync();
+        //    var result = userRepo.Add(user);
+        //    await UnitOfWork.SaveChangesAsync();
 
-            var message = EmailTemplateHelper.RegisterUserMailContent(registerDto.Name, registerDto.Surname, user.PasswordResetOtpCode);
-            await EmailHelper.SendMail(registerDto.Email, "Yeni Üyelik", message);
+        //    var message = EmailTemplateHelper.RegisterUserMailContent(registerDto.Name, registerDto.Surname, user.PasswordResetOtpCode);
+        //    await EmailHelper.SendMail(registerDto.Email, "Yeni Üyelik", message);
 
-            #region Roles
-            var roleRepo = UnitOfWork.GetRepository<Role>();
-            var addingRole = await roleRepo.Get(d => d.Name == RoleNames.User);
-            if (addingRole == null)
-            {
-                return new ServiceResult<long?>(null, "Kayıt sırasında bir problem oluştu. Lütfen sistem yöneticisiyle iletişime geçiniz.", ResultType.Error);
-            }
-            var addingUserRole = new UserRole()
-            {
-                UserId = user.Id,
-                RoleId = addingRole.Id,
-            };
+        //    #region Roles
+        //    var roleRepo = UnitOfWork.GetRepository<Role>();
+        //    var addingRole = await roleRepo.Get(d => d.Name == RoleNames.User);
+        //    if (addingRole == null)
+        //    {
+        //        return new ServiceResult<long?>(null, "Kayıt sırasında bir problem oluştu. Lütfen sistem yöneticisiyle iletişime geçiniz.", ResultType.Error);
+        //    }
+        //    var addingUserRole = new UserRole()
+        //    {
+        //        UserId = user.Id,
+        //        RoleId = addingRole.Id,
+        //    };
 
-            await userRoleRepo.Add(addingUserRole);
-            await UnitOfWork.SaveChangesAsync();
-            #endregion
+        //    await userRoleRepo.Add(addingUserRole);
+        //    await UnitOfWork.SaveChangesAsync();
+        //    #endregion
 
-            return new ServiceResult<long?>(user.Id);
-        }
+        //    return new ServiceResult<long?>(user.Id);
+        //}
 
-        /// <summary>
-        /// Edevlet kullanıcısı sistemde ekli değilse kaydını yapar
-        /// </summary>
-        /// <param name="tckn"></param>
-        /// <param name="ad"></param>
-        /// <param name="soyad"></param>
-        /// <returns></returns>
-        public async Task<ServiceResult<UserInfoDto>> GetEdevletUser(string tckn, string ad, string soyad)
-        {
-            var userRepo = UnitOfWork.GetRepository<User>();
-            var hashedEmail = $"e-devlet-kullanicisi-{CryptoExtensions.EncryptString(Keys.CryptoKey, tckn)}";
-
-            var flatPassword = tckn + ad + soyad;
-            var hashedPassword = PasswordHelper.HashPassword(flatPassword);
-
-            User user = await userRepo.Get(d => d.Email == hashedEmail && !d.IsDeleted);
-
-            if (user == null)
-            {
-                #region Adding user
-                user = new User()
-                {
-                    Name = ad,
-                    Surname = soyad,
-                    Password = hashedPassword,
-                    Email = hashedEmail,
-                    IsActive = true
-                };
-
-                var result = userRepo.Add(user);
-                await UnitOfWork.SaveChangesAsync();
-                #endregion
-
-                #region Adding User Role
-                var roleRepo = UnitOfWork.GetRepository<Role>();
-                var userRoleRepo = UnitOfWork.GetRepository<UserRole>();
-                var addingRole = await roleRepo.Get(d => d.Name == RoleNames.User);
-                var addingUserRole = new UserRole()
-                {
-                    UserId = user.Id,
-                    RoleId = addingRole.Id,
-                };
-
-                await userRoleRepo.Add(addingUserRole);
-                await UnitOfWork.SaveChangesAsync();
-                #endregion
-
-                user = await userRepo.Get(d => d.Email == hashedEmail && !d.IsDeleted);
-            }
-
-            var loginDto = new LoginDto() { Email = hashedEmail, Password = flatPassword };
-            return await LoginCommon(user, loginDto);
-        }
-
+ 
         #region privates
         private async Task<ServiceResult<UserInfoDto>> LoginCommon(User user, LoginDto model, long? adminUserId = null)
         {

@@ -114,7 +114,7 @@ namespace SAMS.Server.Services
         {
             var deletedCount = 0;
             var documentRepo = unitOfWork.GetRepository<Document>();
-            var document = await documentRepo.Get(d => d.IsDeleted == false && d.DownloadLink == fileUrl, disableTracking: false);
+            var document = await documentRepo.Get(d => d.IsDeleted == false && d.DownloadLink == fileUrl);
             if (document != null)
             {
                 documentRepo.Delete(document);

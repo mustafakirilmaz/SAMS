@@ -74,23 +74,105 @@ namespace SAMS.Server.Controllers
             return await commonService.GetUsers(searchTerm);
         }
 
-		[HttpGet("cities")]
+        /// <summary>
+        /// Şehirleri Alma
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("cities")]
 		public async Task<ServiceResult> GetCities()
 		{
 			return await commonService.GetCities();
 		}
 
-		[HttpGet("towns")]
+        /// <summary>
+        /// İlçeleri Alma
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("towns")]
 		public async Task<ServiceResult> GetTowns(int cityCode)
 		{
 			return await commonService.GetTowns(cityCode);
 		}
 
-		[HttpGet("districts")]
+        /// <summary>
+        /// Mahalleleri Alma
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("districts")]
 		public async Task<ServiceResult> GetDistricts(int townCode)
 		{
 			return await commonService.GetDistricts(townCode);
-		}
-		#endregion
-	}
+        }
+
+        /// <summary>
+        /// Tüm Siteleri Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("sites")]
+        public async Task<ServiceResult> GetSites()
+        {
+            return await commonService.GetSites();
+        }
+
+        /// <summary>
+        /// Tüm Binaları Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("buildings")]
+        public async Task<ServiceResult> GetBuildings()
+        {
+            return await commonService.GetBuildings();
+        }
+
+        /// <summary>
+        /// Tüm Eşit Gider Türlerini Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("equalexpensetypes")]
+        public async Task<ServiceResult> GetEqualExpenseTypes()
+        {
+            return await commonService.GetEqualExpenseTypes();
+        }
+
+        /// <summary>
+        /// Tüm Oransal Gider Türlerini Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("proportionalexpensetypes")]
+        public async Task<ServiceResult> GetProportionalExpenseTypes()
+        {
+            return await commonService.GetProportionalExpenseTypes();
+        }
+
+        /// <summary>
+        /// Tüm Demirbaş Gider Türlerini Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("fixtureexpensetypes")]
+        public async Task<ServiceResult> GetFixtureExpenseTypes()
+        {
+            return await commonService.GetFixtureExpenseTypes();
+        }
+
+        /// <summary>
+        /// Tüm İşletme Projelerini Döner
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("businessprojects")]
+        public async Task<ServiceResult> GetBusinessProjects()
+        {
+            return await commonService.GetBusinessProjects();
+        }
+
+        #endregion
+    }
 }

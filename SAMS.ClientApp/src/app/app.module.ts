@@ -37,10 +37,30 @@ import { ForgetPasswordComponent } from './pages/account/forget-password/forget-
 import { SelectRoleComponent } from './pages/account/select-role/select-role.component';
 import { AppConfigComponent } from './shared/components/app-config/app.config.component';
 
+import { SiteDetailComponent } from './pages/site/site-detail/site-detail.component';
+import { SiteListComponent } from './pages/site/site-list/site-list.component';
+
+import { BuildingDetailComponent } from './pages/building/building-detail/building-detail.component';
+import { BuildingListComponent } from './pages/building/building-list/building-list.component';
+import { UnitDetailComponent } from './pages/unit/unit-detail/unit-detail.component';
+import { UnitListComponent } from './pages/unit/unit-list/unit-list.component';
+import { BusinessProjectDetailComponent } from './pages/business-projects/business-project/business-project-detail/business-project-detail.component';
+import { BusinessProjectListComponent } from './pages/business-projects/business-project/business-project-list/business-project-list.component';
+import { EqualExpenseDetailComponent } from './pages/business-projects/equal-expense/equal-expense-detail/equal-expense-detail.component';
+import { EqualExpenseListComponent } from './pages/business-projects/equal-expense/equal-expense-list/equal-expense-list.component';
+import { ProportionalExpenseDetailComponent } from './pages/business-projects/proportional-expense/proportional-expense-detail/proportional-expense-detail.component';
+import { ProportionalExpenseListComponent } from './pages/business-projects/proportional-expense/proportional-expense-list/proportional-expense-list.component';
+import { FixtureExpenseDetailComponent } from './pages/business-projects/fixture-expense/fixture-expense-detail/fixture-expense-detail.component';
+import { FixtureExpenseListComponent } from './pages/business-projects/fixture-expense/fixture-expense-list/fixture-expense-list.component';
+import { BusinessProjectStepperComponent } from './pages/business-projects/business-project-stepper/business-project-stepper.component';
+import { BusinessProjectMainComponent } from './pages/business-projects/business-project-main/business-project-main.component';
 
 
 registerLocaleData(localeTr, 'tr');
 export function tokenGetter() {
+    if (!this.globals) {
+        return null;
+    }
     return localStorage.getItem(this.globals.localStorageItems.authToken);
 }
 
@@ -61,11 +81,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         FullCalendarModule,
         TranslateModule.forRoot({
             loader: {
-              provide: TranslateLoader,
-              useFactory: HttpLoaderFactory,
-              deps: [HttpClient]
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
             }
-          }),
+        }),
         JwtModule.forRoot({ config: { tokenGetter: tokenGetter, } }),
     ],
     declarations: [
@@ -73,6 +93,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         HomeComponent,
         LoginComponent, ChangePasswordComponent, ForgetPasswordComponent, SelectRoleComponent,
         UserDetailComponent, UserListComponent, UserProfileComponent,
+        SiteDetailComponent, SiteListComponent,
+        BuildingDetailComponent, BuildingListComponent,
+        UnitDetailComponent, UnitListComponent,
+        BusinessProjectDetailComponent, BusinessProjectListComponent,
+        EqualExpenseDetailComponent, EqualExpenseListComponent,
+        ProportionalExpenseDetailComponent, ProportionalExpenseListComponent,
+        FixtureExpenseDetailComponent, FixtureExpenseListComponent, BusinessProjectStepperComponent, BusinessProjectMainComponent
     ],
     exports: [
         FormsModule,

@@ -34,6 +34,31 @@ export class CommonService {
     }
 
     getDistricts(townCode: number) {
-        return this.httpHelper.get<SelectItem[]>('Common', 'districts', this.ch.createParams({ 'townCode': townCode }));
+        return this.httpHelper.get<SelectItem[]>('Common', 'districts', this.ch.createParams({'townCode': townCode }));
+    }
+
+    getSites() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'sites');
+    }
+
+    getBuildings() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'buildings');
+    }
+
+    getEqualExpenseTypes() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'equalexpensetypes');
+    }
+
+    getProportionalExpenseTypes() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'proportionalexpensetypes');
+    }
+
+    getFixtureExpenseTypes() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'fixtureexpensetypes');
+    }
+
+    getBusinessProjects() {
+        return this.httpHelper.get<SelectItem[]>('Common', 'businessprojects');
     }
 }
+//'cityCode': cityCode, 'townCode': townCode

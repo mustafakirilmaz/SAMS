@@ -209,16 +209,16 @@ namespace SAMS.Server.Controllers
             return await accountService.UpdateProfile(userDto);
         }
 
-        /// <summary>
-        /// Sisteme üye olma
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost("register")]
-        [AllowAnonymous]
-        public async Task<ServiceResult<long?>> Register(RegisterUserDto model)
-        {
-            return await accountService.Register(model);
-        }
+        ///// <summary>
+        ///// Sisteme üye olma
+        ///// </summary>
+        ///// <param name="model"></param>
+        ///// <returns></returns>
+        //[HttpPost("register")]
+        //[AllowAnonymous]
+        //public async Task<ServiceResult<long?>> Register(RegisterUserDto model)
+        //{
+        //    return await accountService.Register(model);
+        //}
     }
 }

@@ -58,7 +58,7 @@ namespace SAMS.Server.Controllers
         /// <param name="id"></param>
         /// <param name="userDto"></param>
         /// <returns></returns>
-        [Roles(RoleNames.User, RoleNames.Admin)]
+        [Roles(RoleNames.Admin)]
         [HttpPut("{id}")]
         public async Task<ServiceResult<long?>> UpdateUser(long id, [FromBody] UserDto userDto)
         {

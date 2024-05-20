@@ -212,6 +212,25 @@ app-autocomplete {
   z-index: 9999;
 }
 
+.p-splitter {
+  display: flex;
+  flex-wrap: nowrap;
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  border-radius: 3px px;
+  color: #495057;
+}
+
+.p-splitter-gutter{
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  background: #f8f9fa;
+}
+
+.p-splitter-horizontal>.p-splitter-gutter>.p-splitter-gutter-handle {
+  background: #dee2e6 !important;
+}
+
+
 // :host ::ng-deep .custom-spinner .p-progress-spinner-circle {
 //     animation: custom-progress-spinner-dash 1.5s ease-in-out infinite, custom-progress-spinner-color 6s ease-in-out infinite;
 // }
