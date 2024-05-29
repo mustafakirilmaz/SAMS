@@ -33,6 +33,8 @@ import { ExpenseTypeListComponent } from './pages/business-projects/expense-type
 import { ExpenseTypeDetailComponent } from './pages/business-projects/expense-type/expense-type-detail/expense-type-detail.component';
 import { ExpenseListComponent } from './pages/business-projects/expense/expense-list/expense-list.component';
 import { ExpenseDetailComponent } from './pages/business-projects/expense/expense-detail/expense-detail.component';
+import { BusinessProjectExpenseDetailComponent } from './pages/business-projects/business-project-expense/business-project-expense-detail/business-project-expense-detail.component';
+import { BusinessProjectExpenseListComponent } from './pages/business-projects/business-project-expense/business-project-expense-list/business-project-expense-list.component';
 
 @NgModule({
     imports: [
@@ -93,6 +95,26 @@ import { ExpenseDetailComponent } from './pages/business-projects/expense/expens
                     {
                         path: 'list-business-project',
                         component: BusinessProjectListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'add-business-project-expense',
+                        component: BusinessProjectExpenseDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'edit-business-project-expense',
+                        component: BusinessProjectExpenseDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-business-project-expense/:businessProjectId',
+                        component: BusinessProjectExpenseListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-business-project-expense',
+                        component: BusinessProjectExpenseListComponent,
                         canActivate: [RoleGuard]
                     },
                     {

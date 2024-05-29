@@ -1,0 +1,27 @@
+<div class="p-col-12">
+  <p-panel header="İşletme Projesi Bilgileri">
+    <form [formGroup]="businessProjectExpenseForm" (ngSubmit)="saveBusinessProjectExpense()">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+          <label class="bold" required>Gider Türü</label>
+          <p-dropdown name="expenseTypeId" [options]="expenseTypes" formControlName="expenseTypeId"></p-dropdown>
+          <app-validator [control]="businessProjectExpenseFormControls.expenseTypeId"></app-validator>
+        </div>
+        <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-6">
+          <label class="bold" required>Gider</label>
+          <p-dropdown name="expenseId" [options]="expenses" formControlName="expenseId"></p-dropdown>
+          <app-validator [control]="businessProjectExpenseFormControls.expenseId"></app-validator>
+          <app-validator [control]="businessProjectExpenseFormControls.name"></app-validator>
+        </div>
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+          <label class="bold" required>Tutar</label>
+          <input type="number" formControlName="cost" maxlength="255" pInputText>
+          <app-validator [control]="businessProjectExpenseFormControls.cost"></app-validator>
+        </div>
+      </div>
+      <div class="p-d-flex p-jc-end p-mt-4">
+        <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+      </div>
+    </form>
+  </p-panel>
+</div>

@@ -58,6 +58,8 @@ import { ExpenseTypeListComponent } from './pages/business-projects/expense-type
 import { ExpenseTypeDetailComponent } from './pages/business-projects/expense-type/expense-type-detail/expense-type-detail.component';
 import { ExpenseListComponent } from './pages/business-projects/expense/expense-list/expense-list.component';
 import { ExpenseDetailComponent } from './pages/business-projects/expense/expense-detail/expense-detail.component';
+import { BusinessProjectExpenseListComponent } from './pages/business-projects/business-project-expense/business-project-expense-list/business-project-expense-list.component';
+import { BusinessProjectExpenseDetailComponent } from './pages/business-projects/business-project-expense/business-project-expense-detail/business-project-expense-detail.component';
 
 
 registerLocaleData(localeTr, 'tr');
@@ -106,6 +108,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         FixtureExpenseDetailComponent, FixtureExpenseListComponent, BusinessProjectStepperComponent, BusinessProjectMainComponent,
         ExpenseTypeListComponent, ExpenseTypeDetailComponent,
         ExpenseListComponent, ExpenseDetailComponent,
+        BusinessProjectExpenseDetailComponent, BusinessProjectExpenseListComponent
     ],
     exports: [
         FormsModule,

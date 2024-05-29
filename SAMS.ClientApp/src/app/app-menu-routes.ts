@@ -31,9 +31,9 @@ export class MenuRoutes {
                     roles: [Roles.Admin],
                     items: [
                         {
-                            label: 'Başvuru',
+                            label: 'İşletme Projesi Giderleri',
                             icon: 'pi pi-fw pi-book',
-                            routerLink: ['/business-project/detail']
+                            routerLink: ['/business-project/list-business-project-expense']
                         },
                         {
                             label: 'Gider Tanımalamaları',
