@@ -1,6 +1,7 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from 'src/app/shared/bases/base.component';
+import { BusinessProjectDetailComponent } from '../business-project/business-project-detail/business-project-detail.component';
 
 @Component({
   selector: 'app-business-project-main',
@@ -13,6 +14,8 @@ export class BusinessProjectMainComponent extends BaseComponent {
   index: number = 0;
   tabCount: number = 6;
 
+  @ViewChild(BusinessProjectDetailComponent) businessProjectDetailComponent: BusinessProjectDetailComponent;
+
   constructor(public router: Router) {
     super();
   }
@@ -22,6 +25,9 @@ export class BusinessProjectMainComponent extends BaseComponent {
   }
 
   openPrev() {
+    if (this.index === 0) {
+      this.businessProjectDetailComponent.saveBusinessProject();
+    }
     this.index = (this.index === 0) ? this.tabCount - 1 : this.index - 1;
   }
 }

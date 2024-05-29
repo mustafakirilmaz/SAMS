@@ -29,6 +29,10 @@ import { ProportionalExpenseDetailComponent } from './pages/business-projects/pr
 import { FixtureExpenseDetailComponent } from './pages/business-projects/fixture-expense/fixture-expense-detail/fixture-expense-detail.component';
 import { FixtureExpenseListComponent } from './pages/business-projects/fixture-expense/fixture-expense-list/fixture-expense-list.component';
 import { BusinessProjectMainComponent } from './pages/business-projects/business-project-main/business-project-main.component';
+import { ExpenseTypeListComponent } from './pages/business-projects/expense-type/expense-type-list/expense-type-list.component';
+import { ExpenseTypeDetailComponent } from './pages/business-projects/expense-type/expense-type-detail/expense-type-detail.component';
+import { ExpenseListComponent } from './pages/business-projects/expense/expense-list/expense-list.component';
+import { ExpenseDetailComponent } from './pages/business-projects/expense/expense-detail/expense-detail.component';
 
 @NgModule({
     imports: [
@@ -67,23 +71,65 @@ import { BusinessProjectMainComponent } from './pages/business-projects/business
                     { path: 'list-unit', component: UnitListComponent, canActivate: [RoleGuard] },
                 ]
             },
-            // {
-            //     path: 'business-project', component: MenuLayoutComponent,
-            //     children: [
-            //         { path: 'add-business-project', component: BusinessProjectDetailComponent, canActivate: [RoleGuard] },
-            //         { path: 'edit-business-project', component: BusinessProjectDetailComponent, canActivate: [RoleGuard] },
-            //         { path: 'list-business-project/:buildingId', component: BusinessProjectListComponent, canActivate: [RoleGuard] },
-            //         { path: 'list-business-project', component: BusinessProjectListComponent, canActivate: [RoleGuard] },
-            //     ]
-            // },            
             {
-                path: 'business-project', component: MenuLayoutComponent,
+                path: 'business-project',
+                component: MenuLayoutComponent,
                 children: [
-                    { path: 'detail', component: BusinessProjectMainComponent, canActivate: [RoleGuard] },
-                    { path: 'equal-expenses', component: EqualExpenseListComponent, canActivate: [RoleGuard] },
-                    { path: 'proportional-expenses', component: ProportionalExpenseListComponent, canActivate: [RoleGuard] },
-                    { path: 'fixture-expenses', component: FixtureExpenseListComponent, canActivate: [RoleGuard] },
-                    { path: 'summary', component: UnitListComponent, canActivate: [RoleGuard] },
+                    {
+                        path: 'add-business-project',
+                        component: BusinessProjectDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'edit-business-project',
+                        component: BusinessProjectDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-business-project/:buildingId',
+                        component: BusinessProjectListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-business-project',
+                        component: BusinessProjectListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'add-expense-type',
+                        component: ExpenseTypeDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'edit-expense-type',
+                        component: ExpenseTypeDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-expense-type',
+                        component: ExpenseTypeListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'add-expense',
+                        component: ExpenseDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'edit-expense',
+                        component: ExpenseDetailComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-expense/:expenseTypeId',
+                        component: ExpenseListComponent,
+                        canActivate: [RoleGuard]
+                    },
+                    {
+                        path: 'list-expense',
+                        component: ExpenseListComponent,
+                        canActivate: [RoleGuard]
+                    },
                 ]
             },
             {

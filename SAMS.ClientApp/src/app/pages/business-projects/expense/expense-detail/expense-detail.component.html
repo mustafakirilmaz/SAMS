@@ -1,0 +1,17 @@
+<form [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+      <label class="bold">Gider Türü</label>
+      <p-dropdown name="expenseTypeId" [options]="expenseTypes" formControlName="expenseTypeId"></p-dropdown>
+      <app-validator [control]="expenseFormControls.expenseTypeId"></app-validator>
+    </div>
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Adı</label>
+      <input type="text" formControlName="name" maxlength="255" pInputText>
+      <app-validator [control]="expenseFormControls.name"></app-validator>
+    </div>
+  </div>
+  <div class="p-d-flex p-jc-end p-mt-4">
+    <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+  </div>
+</form>

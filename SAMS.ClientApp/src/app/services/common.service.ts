@@ -34,7 +34,7 @@ export class CommonService {
     }
 
     getDistricts(townCode: number) {
-        return this.httpHelper.get<SelectItem[]>('Common', 'districts', this.ch.createParams({'townCode': townCode }));
+        return this.httpHelper.get<SelectItem[]>('Common', 'districts', this.ch.createParams({ 'townCode': townCode }));
     }
 
     getSites() {
@@ -59,6 +59,16 @@ export class CommonService {
 
     getBusinessProjects() {
         return this.httpHelper.get<SelectItem[]>('Common', 'businessprojects');
+    }
+    // getExpenseTypes() {
+    //     return this.httpHelper.get<SelectItem[]>('Common', 'expenseTypes');
+    // }
+    getExpenseTypes() {
+        return this.httpHelper.get<SelectItem[]>('common', 'expensetypes');
+    }
+
+    getExpenses(expenseTypeId: number) {
+        return this.httpHelper.get<SelectItem[]>('common', 'expenses', this.ch.createParams({ 'expenseTypeId': expenseTypeId }));
     }
 }
 //'cityCode': cityCode, 'townCode': townCode

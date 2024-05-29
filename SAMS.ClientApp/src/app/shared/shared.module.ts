@@ -120,7 +120,6 @@ import { DistrictComponent } from './components/city-town-district/district/dist
 
 
 import { SplitterModule } from 'primeng/splitter';
-
 registerLocaleData(localeTr, 'tr');
 
 @NgModule({
@@ -296,7 +295,7 @@ registerLocaleData(localeTr, 'tr');
 
         RemovewhitespacesPipe,
         SafeHtmlPipe,
-        
+
         CityComponent,
         TownComponent,
         DistrictComponent,
@@ -332,7 +331,7 @@ registerLocaleData(localeTr, 'tr');
 
         RemovewhitespacesPipe,
         SafeHtmlPipe,
-        
+
         CityComponent,
         TownComponent,
         DistrictComponent,

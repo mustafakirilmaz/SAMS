@@ -1,0 +1,12 @@
+<form [formGroup]="expenseTypeForm" (ngSubmit)="saveExpenseType()">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <label class="bold" required>Adı</label>
+      <input type="text" formControlName="name" maxlength="255" pInputText>
+      <app-validator [control]="expenseTypeFormControls.name"></app-validator>
+    </div>
+  </div>
+  <div class="p-d-flex p-jc-end p-mt-4">
+    <button pButton type="submit" label="Kaydet" icon="pi pi-save" iconPos="left"></button>
+  </div>
+</form>

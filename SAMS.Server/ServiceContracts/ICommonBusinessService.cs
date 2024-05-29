@@ -84,5 +84,17 @@ namespace SAMS.Server.ServiceContracts
         /// </summary>
         /// <returns></returns>
         Task<ServiceResult<List<SelectItem>>> GetBusinessProjects();
+
+        /// <summary>
+        /// Gider Türlerini Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetExpenseTypes();
+
+        /// <summary>
+        /// Giderleri Getir
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResult<List<SelectItem>>> GetExpenses(int expenseTypeId);
     }
 }

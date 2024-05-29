@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/bases/base.component';
 import { BuildingService } from 'src/app/services/building-service';
 import { ColumnType } from 'src/app/shared/enums/column-type';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-building-list',
@@ -20,11 +18,11 @@ export class BuildingListComponent extends BaseComponent implements OnInit {
     ['name', 'Bina Adı'],
     ['city', 'İl'],
     ['town', 'İlçe'],
-    ['district', 'Mahalle'],    
+    ['district', 'Mahalle'],
     ['units', 'Bağımsız Bölümler', ColumnType.Operation],
     ['operations', 'İşlem', ColumnType.Operation]
   ];
- 
+
   constructor(public buildingService: BuildingService, private router: Router) { super(); }
 
   ngOnInit() {
@@ -75,12 +73,12 @@ export class BuildingListComponent extends BaseComponent implements OnInit {
     this.createBuildingModalVisible = true;
   }
 
-  onBuildingSaved(event){
+  onBuildingSaved(event) {
     this.createBuildingModalVisible = false;
     this.gridRefresh();
   }
 
-  onHideBuildingModal(){
+  onHideBuildingModal() {
     this.selectedBuilding = null;
   }
 

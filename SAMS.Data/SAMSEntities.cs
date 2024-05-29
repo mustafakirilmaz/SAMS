@@ -20,6 +20,9 @@ namespace SAMS.Data
         public DbSet<EqualExpense> EqualExpenses { get; set; }
         public DbSet<ProportionalExpense> ProportionalExpenses { get; set; }
         public DbSet<FixtureExpense> FixtureExpenses { get; set; }
+        public DbSet<ExpenseType> ExpenseTypes { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+
 
         public DbSet<City> Cities { get; set; }
 		public DbSet<Town> Towns { get; set; }

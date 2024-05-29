@@ -26,12 +26,25 @@ export class MenuRoutes {
                     ]
                 },
                 {
-                    label: 'İşletme Projesi', icon: 'pi pi-fw pi-book', roles: [Roles.Admin],
+                    label: 'İşletme Projesi',
+                    icon: 'pi pi-fw pi-book',
+                    roles: [Roles.Admin],
                     items: [
-                        { label: 'Başvuru', icon: 'pi pi-fw pi-book', routerLink: ['/business-project/detail'] },
-                        // { label: 'Upload Documents', icon: 'pi pi-fw pi-upload', routerLink: ['/pica-form/documents'] },
+                        {
+                            label: 'Başvuru',
+                            icon: 'pi pi-fw pi-book',
+                            routerLink: ['/business-project/detail']
+                        },
+                        {
+                            label: 'Gider Tanımalamaları',
+                            icon: 'pi pi-fw pi-list',
+                            items: [
+                                { label: 'Gider Türleri', icon: 'pi pi-fw pi-angle-right', routerLink: ['/business-project/list-expense-type'] },
+                                { label: 'Giderler', icon: 'pi pi-fw pi-angle-right', routerLink: ['/business-project/list-expense'] },
+                            ]
+                        }
                     ]
-                },
+                }
             ]
         }
     ];

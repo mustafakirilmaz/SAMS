@@ -257,10 +257,68 @@ namespace SAMS.Server.Services
                         select new SelectItem
                         {
                             value = businessProject.Id,
-                            label = site != null ? businessProject.Name + " - " +building.Name + "(" + site.Name + ")" : businessProject.Name + " - " + building.Name,
+                            label = site != null ? businessProject.Name + " - " + building.Name + " (" + site.Name + ")" : businessProject.Name + " - " + building.Name,
                         };
 
-            var result = query.ToList(); // Sorguyu çalıştır ve sonuçları al
+            var result = await query.ToListAsync(); // Sorguyu asenkron olarak çalıştır ve sonuçları al
+
+            return new ServiceResult<List<SelectItem>>(result);
+        }
+
+
+        /// <summary>
+        /// Gider Türlerini Getir
+        /// </summary>
+        /// <param name="townCode"></param>
+        /// <returns></returns>
+        /// 
+        //public async Task<ServiceResult<List<SelectItem>>> GetExpenseTypes()
+        //{
+        //    var expenseTypes = UnitOfWork.GetRepository<ExpenseType>().AsQueryable();
+
+        //    var query = from expenseType in expenseTypes
+        //                where expenseType.IsDeleted != true
+        //                select new SelectItem
+        //                {
+        //                    value = expenseType.Id,
+        //                    label = expenseType.Name
+        //                };
+
+        //    var result = await query.ToListAsync();
+        //    return new ServiceResult<List<SelectItem>>(result);
+        //}
+
+
+
+        /// <summary>
+        /// Gider Türlerini Getir
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ServiceResult<List<SelectItem>>> GetExpenseTypes()
+        {
+            var expenseTypes = (await UnitOfWork.GetRepository<ExpenseType>().GetAll()).OrderBy(d => d.Name).ToList();
+            var result = expenseTypes.Select(d => new SelectItem
+            {
+                value = d.Id,
+                label = d.Name
+            }).ToList();
+
+            return new ServiceResult<List<SelectItem>>(result);
+        }
+
+        /// <summary>
+        /// Giderleri getir
+        /// </summary>
+        /// <param name="expenseTypeId"></param>
+        /// <returns></returns>
+		public async Task<ServiceResult<List<SelectItem>>> GetExpenses (int expenseTypeId)
+        {
+            var expenses = (await UnitOfWork.GetRepository<Expense>().GetAll(d => d.ExpenseTypeId == expenseTypeId)).OrderBy(d => d.Name).ToList();
+            var result = expenses.Select(d => new SelectItem
+            {
+                value = d.Id,
+                label = d.Name
+            }).ToList();
 
             return new ServiceResult<List<SelectItem>>(result);
         }

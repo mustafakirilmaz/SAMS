@@ -62,6 +62,8 @@ namespace SAMS.Server
             services.AddScoped<IEqualExpenseBusinessService, EqualExpenseBusinessService>();
             services.AddScoped<IProportionalExpenseBusinessService, ProportionalExpenseBusinessService>();
             services.AddScoped<IFixtureExpenseBusinessService, FixtureExpenseBusinessService>();
+            services.AddScoped<IExpenseTypeBusinessService, ExpenseTypeBusinessService>();
+            services.AddScoped<IExpenseBusinessService, ExpenseBusinessService>();
             #endregion
 
             #region Other

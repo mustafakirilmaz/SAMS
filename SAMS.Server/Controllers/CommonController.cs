@@ -172,7 +172,33 @@ namespace SAMS.Server.Controllers
         {
             return await commonService.GetBusinessProjects();
         }
+        //[HttpGet("expenseTypes")]
+        //public async Task<ServiceResult> GetExpenseTypes()
+        //{
+        //    return await commonService.GetExpenseTypes();
+        //}
 
+        /// <summary>
+        /// Gider Türlerini Alma
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("expensetypes")]
+        public async Task<ServiceResult> GetExpenseTypes()
+        {
+            return await commonService.GetExpenseTypes();
+        }
+
+        /// <summary>
+        /// Giderleri Alma
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        [HttpGet("expenses")]
+        public async Task<ServiceResult> GetExpenses(int expenseTypeId)
+        {
+            return await commonService.GetExpenses(expenseTypeId);
+        }
         #endregion
     }
 }

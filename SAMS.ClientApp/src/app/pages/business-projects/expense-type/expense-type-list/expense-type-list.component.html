@@ -1,0 +1,38 @@
+<app-page-header [caption]="'ExpenseType Listesi'"></app-page-header>
+
+<p-panel header="Arama Kriterleri" [toggleable]="true">
+  <form [formGroup]="ch.getFilterForm(gridName)" (ngSubmit)="ch.setGridRefreshAsSearch(gridName);gridRefresh();">
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
+        <label class="bold">Gider Türü</label>
+        <input type="text" formControlName="name" maxlength="50" pInputText>
+      </div>
+    </div>
+    <div class="p-d-flex p-jc-end">
+      <button pButton type="button" label="Ekle" icon="pi pi-plus" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="openExpenseTypeModal()"></button>
+      <button pButton type="button" label="Temizle" icon="pi pi-refresh" iconPos="left"
+        class="p-button-info p-button-outlined p-mr-2" (click)="ch.clearFilters(gridName)"></button>
+      <button pButton type="submit" label="Ara" icon="pi pi-search" iconPos="left"></button>
+    </div>
+  </form>
+</p-panel>
+
+<p-dialog [(visible)]="createExpenseTypeModalVisible" [style]="{width: '50vw'}" (onHide)="onHideExpenseTypeModal()">
+  <ng-template pTemplate="header">
+    <h3>ExpenseType {{ ch.isNullOrUndefined(selectedExpenseType) ? 'Ekle' : 'Düzenle' }}</h3>
+  </ng-template>
+  <app-expense-type-detail [expenseTypeId]="selectedExpenseType?.id" (onExpenseTypeSaved)="onExpenseTypeSaved($event)"
+    *ngIf="createExpenseTypeModalVisible"></app-expense-type-detail>
+</p-dialog>
+
+<p-panel header="Gider Türü Listesi" styleClass="p-mt-2">
+  <app-grid (gridRefresh)="gridRefresh()" [dataTableId]="gridName">
+    <ng-template let-expenseType="rowData" cellTemplate="operations">
+      <button pButton pRipple icon="pi pi-pencil" pTooltip="Düzenle" class="p-button-rounded p-button-success p-mr-2"
+        (click)="editExpenseType(expenseType)"></button>
+      <button pButton pRipple icon="pi pi-trash" pTooltip="Sil" class="p-button-rounded p-button-warning"
+        (click)="deleteExpenseType(expenseType.id)"></button>
+    </ng-template>
+  </app-grid>
+</p-panel>
