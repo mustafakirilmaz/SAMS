@@ -4,7 +4,8 @@
       <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12">
           <label class="bold" required>Gider Türü</label>
-          <p-dropdown name="expenseTypeId" [options]="expenseTypes" formControlName="expenseTypeId"></p-dropdown>
+          <p-dropdown name="expenseTypeId" [options]="expenseTypes" formControlName="expenseTypeId"
+            (onChange)="onExpenseTypeChange($event)"></p-dropdown>
           <app-validator [control]="businessProjectExpenseFormControls.expenseTypeId"></app-validator>
         </div>
         <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-6">

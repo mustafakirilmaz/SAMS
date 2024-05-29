@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { BusinessProjectExpenseService } from 'src/app/services/business-project-expense-service';
 import { EqualExpenseService } from 'src/app/services/equal-expense-service';
@@ -19,7 +19,6 @@ export class BusinessProjectExpenseDetailComponent extends BaseComponent impleme
   businessProjectExpenseForm: FormGroup;
   expenseTypes: SelectItem[];
   expenses: SelectItem[];
-
 
   constructor(private businessProjectExpenseService: BusinessProjectExpenseService, private equalExpenseService: EqualExpenseService, public router: Router) { super(); }
 
@@ -72,6 +71,14 @@ export class BusinessProjectExpenseDetailComponent extends BaseComponent impleme
     this.businessProjectExpenseService.getBusinessProjectExpenseById(businessProjectExpenseId).subscribe((result: ServiceResult<object>) => {
       if (this.ch.checkResult(result)) {
         this.ch.mapToFormGroup(result.data, this.businessProjectExpenseForm);
+      }
+    });
+  }
+
+  onExpenseTypeChange(event: any) {
+    this.cs.getExpenses(event.value).subscribe(result => {
+      if (this.ch.checkResult(result)) {
+        this.expenses = result.data;
       }
     });
   }

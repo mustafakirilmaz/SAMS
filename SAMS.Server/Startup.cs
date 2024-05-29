@@ -67,44 +67,44 @@ namespace SAMS.Server
             #endregion
 
             #region Other
-            #region Swagger Dökümantasyon
-            services.AddSwaggerGen(option =>
-            {
-                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Site ve Apartman Yönetim Sistemi Web Servis Dokümaný", Version = "v1" });
-                option.OperationFilter<OpenApiParameterIgnoreFilter>();
+            //#region Swagger Dökümantasyon
+            //services.AddSwaggerGen(option =>
+            //{
+            //    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Site ve Apartman Yönetim Sistemi Web Servis Dokümaný", Version = "v1" });
+            //    option.OperationFilter<OpenApiParameterIgnoreFilter>();
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                option.IncludeXmlComments(xmlPath);
+            //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //    option.IncludeXmlComments(xmlPath);
 
-                #region Swagger Authorization
-                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Geçerli bir token giriniz",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
-                });
-                option.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type=ReferenceType.SecurityScheme,
-                                Id="Bearer"
-                            }
-                        },
-                        new string[]{}
-                    }
-                #endregion
-                });
-                option.SchemaFilter<EnumTypesSchemaFilter>(xmlPath);
-            });
-            #endregion
+            //    #region Swagger Authorization
+            //    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            //    {
+            //        In = ParameterLocation.Header,
+            //        Description = "Geçerli bir token giriniz",
+            //        Name = "Authorization",
+            //        Type = SecuritySchemeType.Http,
+            //        BearerFormat = "JWT",
+            //        Scheme = "Bearer"
+            //    });
+            //    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //    {
+            //        {
+            //            new OpenApiSecurityScheme
+            //            {
+            //                Reference = new OpenApiReference
+            //                {
+            //                    Type=ReferenceType.SecurityScheme,
+            //                    Id="Bearer"
+            //                }
+            //            },
+            //            new string[]{}
+            //        }
+            //    #endregion
+            //    });
+            //    option.SchemaFilter<EnumTypesSchemaFilter>(xmlPath);
+            //});
+            //#endregion
 
             #region Token çalýnmasýna karþýlýk ip adres doðrulamasý
             services.AddSingleton<IAuthorizationHandler, IpAddressCheckHandler>();
